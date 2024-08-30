@@ -11,7 +11,7 @@ using POSWebAPI.Repo;
 namespace POSWebAPI.Repo.Migrations
 {
     [DbContext(typeof(POSContext))]
-    [Migration("20240830073848_InitialCreate")]
+    [Migration("20240830090458_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

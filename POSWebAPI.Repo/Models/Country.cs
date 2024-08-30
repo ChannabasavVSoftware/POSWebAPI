@@ -10,6 +10,8 @@ namespace POSWebAPI.Repo.Models
 
         public string CountryName { get; set; }
 
+        public int CountryCode { get; set; }
+
 
 
         [JsonIgnore]
