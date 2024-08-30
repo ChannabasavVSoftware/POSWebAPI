@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POSWebAPI", "POSWebAPI\POSWebAPI.csproj", "{22DE060F-0678-4FD6-8959-5127510BB168}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "POSWebAPI", "POSWebAPI\POSWebAPI.csproj", "{22DE060F-0678-4FD6-8959-5127510BB168}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POSWebAPI.Repo", "POSWebAPI.Repo\POSWebAPI.Repo.csproj", "{CADCB39B-85A3-46D5-90BA-ACC3A34BF622}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{22DE060F-0678-4FD6-8959-5127510BB168}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22DE060F-0678-4FD6-8959-5127510BB168}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22DE060F-0678-4FD6-8959-5127510BB168}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CADCB39B-85A3-46D5-90BA-ACC3A34BF622}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CADCB39B-85A3-46D5-90BA-ACC3A34BF622}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CADCB39B-85A3-46D5-90BA-ACC3A34BF622}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CADCB39B-85A3-46D5-90BA-ACC3A34BF622}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
