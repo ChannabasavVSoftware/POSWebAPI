@@ -15,7 +15,7 @@ namespace POSWebAPI
             builder.Services.AddControllers();
 
             builder.Services.AddDbContext<POSContext>(options =>
-                options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlite(builder.Configuration.GetConnectionString("POSWEBAPIPROJECT")));
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
