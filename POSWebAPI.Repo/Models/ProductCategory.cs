@@ -13,7 +13,7 @@ namespace POSWebAPI.Repo.Models
         public string CategoryDescription { get; set; } = string.Empty;
 
         public bool IsActive { get; set; }
-        public DateTime CreatedAt { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
 
 
         [JsonIgnore]
