@@ -20,6 +20,6 @@ namespace POSWebAPI.Repo.Models
 
 
         [JsonIgnore]
-        public ICollection<User> Users { get; set; }
+        public ICollection<User> Users { get; set; } = new List<User>();
     }
 }

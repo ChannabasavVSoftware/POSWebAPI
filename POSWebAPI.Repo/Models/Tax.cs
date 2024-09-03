@@ -6,7 +6,7 @@ namespace POSWebAPI.Repo.Models
     public class Tax
     {
         [Key]
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
 
         public string TaxName { get; set; }
 
@@ -17,6 +17,6 @@ namespace POSWebAPI.Repo.Models
         [JsonIgnore]
         public ICollection<Product> Products { get; set; } = new List<Product>(); // Navigation property
         [JsonIgnore]
-        public ICollection<OrderDetail> OrderDetails { get; set; }
+        public ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
     }
 }

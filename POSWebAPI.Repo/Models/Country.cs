@@ -15,6 +15,6 @@ namespace POSWebAPI.Repo.Models
 
 
         [JsonIgnore]
-        public ICollection<State> States { get; set; }
+        public ICollection<State> States { get; set; } = new List<State>();
     }
 }

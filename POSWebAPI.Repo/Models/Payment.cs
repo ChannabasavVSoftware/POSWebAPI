@@ -16,6 +16,6 @@ namespace POSWebAPI.Repo.Models
 
 
         [JsonIgnore]
-        public ICollection<Order> Orders { get; set; }
+        public ICollection<Order> Orders { get; set; } = new List<Order>();
     }
 }

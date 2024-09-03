@@ -18,6 +18,6 @@ namespace POSWebAPI.Repo.Models
 
 
         [JsonIgnore]
-        public ICollection<City> Cities { get; set; }
+        public ICollection<City> Cities { get; set; } = new List<City>();
     }
 }
