@@ -4,9 +4,6 @@ using POSWebAPI.Repo;
 using POSWebAPI.Repo.Models;
 
 
-
-
-
 [Route("api/[controller]")]
 [ApiController]
 public class ProductCategoriesController : ControllerBase
@@ -18,7 +15,7 @@ public class ProductCategoriesController : ControllerBase
         _context = context;
     }
 
-    [HttpGet]
+    [HttpGet("Categories")]
     public async Task<ActionResult<IEnumerable<ProductCategory>>> GetProductCategories()
     {
         return await _context.ProductCategories.ToListAsync();
@@ -37,7 +34,7 @@ public class ProductCategoriesController : ControllerBase
         return productCategory;
     }
 
-    [HttpPost]
+    [HttpPost("Product")]
     public async Task<ActionResult<ProductCategory>> PostProductCategory(ProductCategory productCategory)
     {
         if (productCategory == null)
