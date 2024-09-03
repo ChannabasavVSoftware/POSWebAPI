@@ -1,85 +1,137 @@
-﻿//using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using POSWebAPI.Repo;
+using POSWebAPI.Repo.Models;
+
+namespace POSWebAPI.Controllers
+{
+    [ApiController]
+    [Route("api/[controller]")]
+    public class OrdersController : ControllerBase
+    {
+        private readonly POSContext _context;
+
+        public OrdersController(POSContext context)
+        {
+            _context = context;
+        }
+
+        // GET: api/Orders
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Order>>> GetOrders()
+        {
+            // Retrieve orders without related data
+            var orders = await _context.Orders.ToListAsync();
+            return Ok(orders);
+        }
+
+        // GET: api/Orders/{id}
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Order>> GetOrder(Guid id)
+        {
+            // Retrieve a single order by its ID
+            var order = await _context.Orders.FindAsync(id);
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(order);
+        }
+
+        // POST: api/Orders
+        [HttpPost]
+        public async Task<ActionResult<Order>> PostOrder(Order order)
+        {
+            if (order == null)
+            {
+                return BadRequest("Order cannot be null.");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            _context.Orders.Add(order);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetOrder), new { id = order.Id }, order);
+        }
+
+        // PUT: api/Orders/{id}
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutOrder(Guid id, Order order)
+        {
+            if (id != order.Id)
+            {
+                return BadRequest("Order ID mismatch.");
+            }
+
+            _context.Entry(order).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!OrderExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+        // DELETE: api/Orders/{id}
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteOrder(Guid id)
+        {
+            var order = await _context.Orders.FindAsync(id);
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            _context.Orders.Remove(order);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        // GET: api/Orders/date-range
+        [HttpGet("date-range")]
+        public async Task<ActionResult<IEnumerable<Order>>> GetOrdersByDateRange([FromQuery] DateTime startDate, [FromQuery] DateTime endDate)
+        {
+            if (startDate > endDate)
+            {
+                return BadRequest("Start date cannot be later than end date.");
+            }
+
+            var orders = await _context.Orders
+                .Where(o => o.OrderDate >= startDate && o.OrderDate <= endDate)
+                .ToListAsync();
+
+            if (orders == null || !orders.Any())
+            {
+                return NotFound("No orders found in the specified date range.");
+            }
+
+            return Ok(orders);
+        }
+
+        private bool OrderExists(Guid id)
+        {
+            return _context.Orders.Any(e => e.Id == id);
+        }
+    }
+}
 
 
-//namespace RestaurantManagementSystem.Controllers
-//{
-//    [Route("api/[controller]")]
-//    [ApiController]
-//    public class OrdeController : ControllerBase
-//    {
-//        private static List<Order> _Orders = new List<Order>
-//        {
-//            new Order { CustomerId = 1,OrderDate =new System.DateTime(),CustomerName="Santhosh",TotalAmount=23090,  },
-//            new Order { CustomerId = 2,OrderDate =new System.DateTime(),CustomerName="Shubam",TotalAmount=23091, },         //OrderItems=new List<OrderItem> {new OrderItem { Id = 3 }, } },
-//            new Order { CustomerId = 3,OrderDate =new System.DateTime(),CustomerName="Santh",TotalAmount=23092, },
-//            new Order { CustomerId = 4,OrderDate =new System.DateTime(),CustomerName="Basava",TotalAmount=23093,  },
-//            new Order { CustomerId = 5,OrderDate =new System.DateTime(),CustomerName="Shammi",TotalAmount=23094,  },
-//            new Order { CustomerId = 6,OrderDate =new System.DateTime(),CustomerName="Virat",TotalAmount=23095, },
-//            new Order { CustomerId = 7,OrderDate =new System.DateTime(),CustomerName="Ganguly",TotalAmount=23096, },
-//            new Order { CustomerId = 8,OrderDate =new System.DateTime(),CustomerName="Chetri",TotalAmount=23097,  }
-
-//        };
-//        [HttpGet]
-//        public ActionResult<IEnumerable<Order>> GetProducts()
-//        {
-//            return _Orders;
-//        }
-
-//        //Get  through id 
-
-//        [HttpGet("{id}")]
-//        public ActionResult<Order> GetProduct(int id)
-//        {
-//            var ProductId = _Orders.FirstOrDefault(p => p.CustomerId == id);
-//            if (ProductId == null)
-//            {
-//                return NotFound();
-//            }
-//            return Ok(ProductId);
-//        }
-//        //create new record through id
-//        [HttpPost]
-//        public ActionResult PostProduct(Order product)
-//        {
-//            _Orders.Add(product);
-//            return CreatedAtAction(nameof(PostProduct), new { id = product.CustomerId }, product);
-//        }
-
-//        //Update existing record through id 
-//        [HttpPut("{CustomerId}")]
-//        public IActionResult PutProduct(int id, Order product)
-//        {
-//            if (id != product.CustomerId)
-//            {
-//                return BadRequest();
-//            }
-//            var existingProduct = _Orders.FirstOrDefault(p => p.CustomerId == id);
-//            if (existingProduct == null)
-//            {
-//                return NotFound();
-//            }
-//            existingProduct.CustomerName = product.CustomerName;
-//            existingProduct.TotalAmount = product.TotalAmount;
-//            existingProduct.OrderDate = product.OrderDate;
-//            existingProduct.OrderItems = product.OrderItems;
-//            return NoContent();
-//        }
-
-//        //Delete record through id
-//        [HttpDelete("{id}")]
-//        public IActionResult DeleteProduct(int customerid)
-//        {
-//            var productid = _Orders.FirstOrDefault(p => p.CustomerId == customerid);
-//            if (productid == null)
-//            {
-
-//                return NotFound();
-//            }
-//            _Orders.Remove(productid);
-
-//            return Ok();
-
-
-//        }
-//    }
-//}
