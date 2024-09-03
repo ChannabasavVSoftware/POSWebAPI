@@ -12,12 +12,9 @@ namespace POSWebAPI.Repo.Models
 
         public Guid CityId { get; set; }
 
-
-
-        public City City { get; set; }
-
         public int PostalCode { get; set; }
 
+        public City? City { get; set; }
 
         [JsonIgnore]
         public ICollection<User> Users { get; set; } = new List<User>();

@@ -20,10 +20,10 @@ namespace POSWebAPI.Repo.Models
 
 
 
-        public Order Order { get; set; }
+        public Order? Order { get; set; }
 
-        public Product Product { get; set; }
+        public Product? Product { get; set; }
 
-        public Tax Tax { get; set; }
+        public Tax? Tax { get; set; }
     }
 }

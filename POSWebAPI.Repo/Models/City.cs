@@ -14,7 +14,7 @@ namespace POSWebAPI.Repo.Models
 
 
 
-        public State State { get; set; }
+        public State? State { get; set; }
 
 
         [JsonIgnore]

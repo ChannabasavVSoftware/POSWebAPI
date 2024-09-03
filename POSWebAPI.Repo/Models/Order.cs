@@ -23,9 +23,9 @@ namespace POSWebAPI.Repo.Models
 
 
 
-        public User User { get; set; }
+        public User? User { get; set; }
 
-        public Payment Payment { get; set; }
+        public Payment? Payment { get; set; }
 
 
         [JsonIgnore]

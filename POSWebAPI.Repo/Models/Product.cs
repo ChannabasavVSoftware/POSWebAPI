@@ -19,9 +19,10 @@ namespace POSWebAPI.Repo.Models
         public Guid TaxId { get; set; }
         public Guid ProductCategoryId { get; set; }
 
-
-        public Tax Tax { get; set; }    // Navigation property to Tax
-        public ProductCategory ProductCategory { get; set; }
+        [JsonIgnore]
+        public Tax? Tax { get; set; }    // Navigation property to Tax
+        [JsonIgnore]
+        public ProductCategory? ProductCategory { get; set; }
 
 
         [JsonIgnore]
