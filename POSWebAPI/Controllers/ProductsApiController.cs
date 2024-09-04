@@ -17,6 +17,7 @@ namespace POSWebAPI.Controllers
         }
 
 
+
         [HttpGet("categories")]
         public async Task<IActionResult> GetProductCategoriesWithProducts()
         {
@@ -39,6 +40,7 @@ namespace POSWebAPI.Controllers
         }
 
 
+
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProductById(Guid id)
         {
@@ -55,11 +57,15 @@ namespace POSWebAPI.Controllers
             return product;
         }
 
+
+
         [HttpGet("products")]
         public async Task<ActionResult<IEnumerable<Product>>> GetProduct()
         {
             return await _context.Products.ToListAsync();
         }
+
+
 
         [HttpPost("products")]
         public async Task<ActionResult<Product>> PostProduct([FromBody] Product product)
@@ -74,6 +80,11 @@ namespace POSWebAPI.Controllers
                 return BadRequest("Invalid ProductCategoryId.");
             }
 
+            if (_context.Products.Any(p => p.ProductName == product.ProductName))
+            {
+                return BadRequest("Product Already Exists");
+            }
+
             product.Id = Guid.NewGuid();  // Assign a new GUID for the product
             product.CreatedAt = DateTime.UtcNow;
 
@@ -83,15 +94,23 @@ namespace POSWebAPI.Controllers
             return CreatedAtAction(nameof(GetProductById), new { id = product.Id }, product);
         }
 
+
+
         [HttpGet("ProductCatagory")]
         public async Task<ActionResult<IEnumerable<ProductCategory>>> GetProductCategory()
         {
             return await _context.ProductCategories.ToListAsync();
         }
 
+
+
         [HttpPost("productcategories")]
         public async Task<ActionResult<ProductCategory>> PostProductCategory([FromBody] ProductCategory productCategory)
         {
+            if (_context.ProductCategories.Any(p => p.CategoryName == productCategory.CategoryName))
+            {
+                return BadRequest("Catergory Name Alread Exists");
+            }
             productCategory.Id = Guid.NewGuid();  // Assign a new GUID for the product
             productCategory.CreatedAt = DateTime.UtcNow;
 

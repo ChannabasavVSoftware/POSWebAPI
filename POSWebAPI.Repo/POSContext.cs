@@ -28,6 +28,7 @@ namespace POSWebAPI.Repo
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
             // Configure Product-ProductCategory relationship
             modelBuilder.Entity<Product>()
                 .HasOne(p => p.ProductCategory)
