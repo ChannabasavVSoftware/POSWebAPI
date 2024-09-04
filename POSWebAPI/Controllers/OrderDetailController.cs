@@ -20,7 +20,7 @@ namespace POSWebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<OrderDetail>>> GetOrderDetails()
         {
-            // Retrieve all OrderDetails without related entities
+            // Retrieve all OrderDetails without related entities 
             var orderDetails = await _context.OrderDetails.ToListAsync();
             return Ok(orderDetails);
         }
