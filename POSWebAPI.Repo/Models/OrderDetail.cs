@@ -24,7 +24,7 @@ namespace POSWebAPI.Repo.Models
         public Order? Order { get; set; }
         [JsonIgnore]
         public Product? Product { get; set; }
-
+        [JsonIgnore]
         public Tax? Tax { get; set; }
     }
 }
