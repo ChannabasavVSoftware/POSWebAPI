@@ -18,8 +18,9 @@ namespace POSWebAPI.Repo.Models
         public Guid RoleId { get; set; }
         public Guid AddressId { get; set; }
 
-
+        [JsonIgnore]
         public Role? Role { get; set; }
+        [JsonIgnore]
         public Address? Address { get; set; }
 
 

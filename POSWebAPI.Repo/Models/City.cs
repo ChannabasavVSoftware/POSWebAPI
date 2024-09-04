@@ -13,7 +13,7 @@ namespace POSWebAPI.Repo.Models
         public Guid StateId { get; set; }
 
 
-
+        [JsonIgnore]
         public State? State { get; set; }
 
 

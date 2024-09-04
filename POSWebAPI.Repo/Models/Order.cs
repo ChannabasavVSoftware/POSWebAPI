@@ -22,9 +22,9 @@ namespace POSWebAPI.Repo.Models
         public Guid PaymentId { get; set; }
 
 
-
+        [JsonIgnore]
         public User? User { get; set; }
-
+        [JsonIgnore]
         public Payment? Payment { get; set; }
 
 

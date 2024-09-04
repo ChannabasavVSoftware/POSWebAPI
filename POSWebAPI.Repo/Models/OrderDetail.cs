@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace POSWebAPI.Repo.Models
 {
@@ -19,9 +20,9 @@ namespace POSWebAPI.Repo.Models
 
 
 
-
+        [JsonIgnore]
         public Order? Order { get; set; }
-
+        [JsonIgnore]
         public Product? Product { get; set; }
 
         public Tax? Tax { get; set; }

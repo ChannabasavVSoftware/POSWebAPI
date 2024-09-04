@@ -13,7 +13,7 @@ namespace POSWebAPI.Repo.Models
         public Guid CountryId { get; set; }
 
 
-
+        [JsonIgnore]
         public Country? Country { get; set; }
 
 

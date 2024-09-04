@@ -14,6 +14,7 @@ namespace POSWebAPI.Repo.Models
 
         public int PostalCode { get; set; }
 
+        [JsonIgnore]
         public City? City { get; set; }
 
         [JsonIgnore]
